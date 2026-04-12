@@ -155,6 +155,7 @@ user_data_scaled = scaler.transform(user_data)
 real_bs_value = black_scholes_call(user_S, user_K, user_T, user_r, user_sigma)
 
 st.write(f"Valor Teórico Exacto (Black-Scholes): **{real_bs_value:.4f}**")
+st.write(f"Valor con ruido: **{real_bs_values+np.random.normal(0,50):.4f}**")
 
 colA, colB, colC = st.columns(3)
 colA.metric("Predicción Regresión Lineal", f"{model_lr.predict(user_data_scaled)[0]:.4f}")
