@@ -84,6 +84,7 @@ def entrenar_modelos(X_train, y_train, X_train_scaled):
 
 model_lr, model_rf, model_nn = entrenar_modelos(X_train, y_train, X_train_scaled)
 
+st.title("Francisco López Sánchez")
 st.title("Comparativa Black-Scholes vs Modelos de Machine Learning")
 
 def plot_predictions(y_real, y_pred, model_name):
