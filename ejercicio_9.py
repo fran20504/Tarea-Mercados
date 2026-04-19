@@ -146,7 +146,7 @@ with tab2:
     col1, col2, col3 = st.columns(3)
     col1.metric("MAE (Error Absoluto Medio)", f"{mean_absolute_error(y_test, y_pred_rf):.4f}")
     col2.metric("R2 (Coeficiente de Determinación)", f"{r2_score(y_test, y_pred_rf):.4f}")
-    col3.metric("Porcentaje Datos con Error<20%", f"{percentage_less20(y_test,y_rf):.4f}")
+    col3.metric("Porcentaje Datos con Error<20%", f"{percentage_less20(y_test,y_pred_rf):.4f}")
     
     st.pyplot(plot_predictions(y_test, y_pred_rf, "Random Forest"))
 
