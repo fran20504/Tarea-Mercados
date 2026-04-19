@@ -72,10 +72,13 @@ X_test_scaled = scaler.transform(X_test)
 
 
 def percentage_less20(y_test, y_pred):
+    y_test = np.array(y_test)
+    y_pred = np.array(y_pred)
+    
     epsilon = 1e-8  
     rel_error = np.abs(y_pred - y_test) / (np.abs(y_test) + epsilon)
+    
     return np.mean(rel_error < 0.2) * 100
-
 
 @st.cache_resource
 def entrenar_modelos(X_train, y_train, X_train_scaled):
@@ -132,7 +135,7 @@ with tab1:
     col1, col2, col3 = st.columns(3)
     col1.metric("MAE (Error Absoluto Medio)", f"{mean_absolute_error(y_test, y_pred_lr):.4f}")
     col2.metric("R2 (Coeficiente de Determinación)", f"{r2_score(y_test, y_pred_lr):.4f}")
-    col3.metric("Porcentaje Datos con Error<20%", f"{percentage_less20(y_test,y_pred):.4f}")
+    col3.metric("Porcentaje Datos con Error<20%", f"{percentage_less20(y_test,y_pred_lr):.4f}")
     
     st.pyplot(plot_predictions(y_test, y_pred_lr, "Regresión Lineal"))
 
@@ -141,9 +144,9 @@ with tab2:
     y_pred_rf = model_rf.predict(X_test)
         
     col1, col2, col3 = st.columns(3)
-    col1.metric("MAE (Error Absoluto Medio)", f"{mean_absolute_error(y_test, y_pred_lr):.4f}")
-    col2.metric("R2 (Coeficiente de Determinación)", f"{r2_score(y_test, y_pred_lr):.4f}")
-    col3.metric("Porcentaje Datos con Error<20%", f"{percentage_less20(y_test,y_pred):.4f}")
+    col1.metric("MAE (Error Absoluto Medio)", f"{mean_absolute_error(y_test, y_pred_rf):.4f}")
+    col2.metric("R2 (Coeficiente de Determinación)", f"{r2_score(y_test, y_pred_rf):.4f}")
+    col3.metric("Porcentaje Datos con Error<20%", f"{percentage_less20(y_test,y_rf):.4f}")
     
     st.pyplot(plot_predictions(y_test, y_pred_rf, "Random Forest"))
 
@@ -152,9 +155,9 @@ with tab3:
     y_pred_nn = model_nn.predict(X_test_scaled)
         
     col1, col2, col3 = st.columns(3)
-    col1.metric("MAE (Error Absoluto Medio)", f"{mean_absolute_error(y_test, y_pred_lr):.4f}")
-    col2.metric("R2 (Coeficiente de Determinación)", f"{r2_score(y_test, y_pred_lr):.4f}")
-    col3.metric("Porcentaje Datos con Error<20%", f"{percentage_less20(y_test,y_pred):.4f}")
+    col1.metric("MAE (Error Absoluto Medio)", f"{mean_absolute_error(y_test, y_pred_nn):.4f}")
+    col2.metric("R2 (Coeficiente de Determinación)", f"{r2_score(y_test, y_pred_nn):.4f}")
+    col3.metric("Porcentaje Datos con Error<20%", f"{percentage_less20(y_test,y_pred_nn):.4f}")
     
     st.pyplot(plot_predictions(y_test, y_pred_nn, "Red Neuronal"))
 
